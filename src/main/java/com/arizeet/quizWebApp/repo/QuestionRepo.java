@@ -14,4 +14,7 @@ public interface QuestionRepo extends JpaRepository<Question, Integer> {
     List<Question> getAllQuestionsByCategory(String category);
 
     List<Question> findByCategory(String category);
+
+    @Query(value = "SELECT * FROM Question q WHERE LOWER(q.category) = LOWER(:category) ORDER BY RANDOM() LIMIT :numQ",nativeQuery = true)
+    List<Question> findRandomQuestionsByCategory(String category, int numQ);
 }
